@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  box-sizing: border-box; padding: 0; margin: 0;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+/* App.css */
+
+:root {
+  --bg: #0e0e0e;
+  --card: #1a1a1a;
+  --accent: linear-gradient(135deg, #7f5af0, #2cb67d);
+  --text: #eaeaea;
+  --muted: #a1a1a1;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ===== LAYOUT ===== */
+
+.layout {
+  display: flex;
+}
+
+/* ===== SIDEBAR ===== */
+
+aside {
+  width: 240px;
+  height: 100vh;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  padding: 24px;
+
+  background: #111;
+  border-right: 1px solid #222;
+}
+
+.logo {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside li {
+  margin-bottom: 15px;
+}
+
+aside a, aside li {
+  color: #aaa;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+aside a:hover, aside li:hover {
+  color: white;
+}
+
+/* ===== MAIN ===== */
+
+main {
+  margin-left: 240px;
+  padding: 20px;
+  width: 100%;
+}
+
+/* ===== FORM ===== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+input, textarea {
+  background: #111;
+  border: 1px solid #222;
+  color: white;
+
+  padding: 10px;
+  border-radius: 6px;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+button {
+  background: #7f5af0;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== GRID ===== */
+
+.inputSearch {
+  margin-bottom: 10px;
+}
+
+.s-notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+/* ===== CARD ===== */
+
+.note-card {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.note-card > button {
+  margin-top: 10px;
+}
+
+.note-card:hover {
+  transform: translateY(-4px);
+}
+
+/* título */
+.note-card h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+
+  white-space: nowrap;        
+  overflow: hidden;           
+  text-overflow: ellipsis;
+
+}
+
+/* preview truncado */
+.note-card p {
+  font-size: 14px;
+  color: #aaa;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+
+
+
+
+
+
+
+/* overlay */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: blur(4px); /* efeito moderno */
+  z-index: 999;
+}
+
+/* container */
+.modal-content {
+  background: #1a1a1a;
+  color: #fff;
+
+  width: 100%;
+  max-width: 600px;
+  max-height: 85vh;
+
+  padding: 24px;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  overflow-y: auto;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* input */
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+
+  outline: none;
+}
+
+.modal-content input:focus {
+  border-color: #4f46e5;
+}
+
+/* textarea */
+.modal-content textarea {
+  width: 100%;
+  min-height: 150px;
+
+  padding: 10px;
+
+  border-radius: 6px;
+  border: 1px solid #333;
+
+  background: #111;
+  color: #fff;
+
+  resize: vertical;
+  outline: none;
+
+  line-height: 1.5;
+}
+
+.modal-content textarea:focus {
+  border-color: #4f46e5;
+}
+
+/* botão fechar */
+.modal-content button {
+  align-self: flex-end;
+
+  color: white;
+
+  border: none;
+  border-radius: 6px;
+
+  padding: 6px 12px;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.modal-content .btn-excluir {
+  background: #ef4444;
+}
+
+.modal-content button:hover {
+  opacity: 0.8;
+}
+
+/* feedback salvar */
+.modal-content span {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
