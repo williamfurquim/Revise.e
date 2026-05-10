@@ -8,7 +8,7 @@ const SideBar = () => {
         if (confirmed){
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-            navigate('/login');
+            navigate('/auth/login');
         } else {
             return
         }
@@ -20,8 +20,8 @@ const SideBar = () => {
 
             <nav>
                 <ul>
-                    <li><Link to={'/notas'}>Anotações</Link></li>
-                    <li><Link to={'/configuracoes'}>Configurações</Link></li>
+                    <li><Link to={'/api/notas'}>Anotações</Link></li>
+                    <li><Link to={'/api/configuracoes'}>Configurações</Link></li>
                     <li><a href="https://github.com/williamfurquim/Revisee"
                         target="_blank"
                         rel="noopener noreferrer">

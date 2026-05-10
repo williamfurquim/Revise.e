@@ -5,7 +5,7 @@ import type {
 } from "../types/allTypes";
 
 export const api = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "http://localhost:3000/api",
 });
 
 api.interceptors.request.use(config => {
@@ -32,7 +32,7 @@ api.interceptors.response.use(
 
             localStorage.removeItem("user");
 
-            window.location.href = "/login";
+            window.location.href = "/auth/login";
         }
 
         return Promise.reject(error);
@@ -60,7 +60,7 @@ export const login = (
     email: string,
     password: string
 ) =>
-    api.post('/login', {
+    api.post('/auth/login', {
         email,
         password
     });
@@ -70,7 +70,7 @@ export const register = (
     email: string,
     password: string
 ) =>
-    api.post('/register', {
+    api.post('/auth/register', {
         name,
         email,
         password

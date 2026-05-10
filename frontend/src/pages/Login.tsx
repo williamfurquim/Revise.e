@@ -50,7 +50,7 @@ const Login = () => {
         JSON.stringify(response.data.user)
       );
 
-      navigate('/notas');
+      navigate('/api/notas');
 
     } catch (err: any) {
 
@@ -88,7 +88,7 @@ const Login = () => {
       );
 
       setTimeout(() => {
-        navigate('/login');
+        navigate('/auth/login');
       }, 2500);
 
       setLoginOn(true);
@@ -101,7 +101,7 @@ const Login = () => {
 
       showMessage(
         err.response?.data?.message ||
-        "Erro ao registrar."
+        `Erro ao registrar: ${err}`
       );
     }
   }

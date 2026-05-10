@@ -3,8 +3,8 @@ import './App.css'
 import { get, post, remove } from './services/api'
 import { type tyNotes } from './types/allTypes';
 import SideBar from './components/SideBar.js';
-import Form from './components/Form.js';
-import NoteCard from './components/NoteCard.js';
+import Form from './components/Form.tsx';
+import NoteCard from './components/NoteCard.tsx';
 
 function App() {
   const [notesList, setNotesList] = useState<tyNotes[]>([]);
