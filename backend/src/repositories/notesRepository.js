@@ -25,7 +25,7 @@ export const notesRepository = {
 
         const result = await prisma.note.updateMany({
             where: {
-                id,
+                id: Number(id),
                 userId
             },
             data
@@ -36,7 +36,7 @@ export const notesRepository = {
         }
 
         return prisma.note.findUnique({
-            where: { id }
+            where: { id: Number(id) }
         });
     },
 
@@ -44,7 +44,7 @@ export const notesRepository = {
 
         const result = await prisma.note.deleteMany({
             where: {
-                id,
+                id: Number(id),
                 userId
             }
         });

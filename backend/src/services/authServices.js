@@ -9,28 +9,16 @@ export const authServices = {
     async register(data) {
 
         if (!data || typeof data !== "object") {
-            throw new AppError(
-                "Dados inválidos.",
-                400
-            );
+            throw new AppError("Dados inválidos.", 400);
         }
 
         const nameError = validateString(data.name, "Nome");
         const passwordError = validateString(data.password, "Senha", 8);
-        const emailError = validateString(data.email, "Email");
-        const invalidEmail = validateEmail(data.email);
+        const emailError = validateEmail(data.email);
 
-        if (
-            nameError ||
-            emailError ||
-            invalidEmail ||
-            passwordError
-        ) {
+        if (nameError || passwordError || emailError) {
             throw new AppError(
-                nameError ||
-                emailError ||
-                invalidEmail ||
-                passwordError,
+                nameError || passwordError || emailError,
                 400
             );
         }
@@ -63,37 +51,15 @@ export const authServices = {
     async login(data) {
 
         if (!data || typeof data !== "object") {
-            throw new AppError(
-                "Dados inválidos.",
-                400
-            );
+            throw new AppError("Dados inválidos.", 400);
         }
 
-        const emailError = validateString(
-            data.email,
-            "Email"
-        );
+        const emailError = validateEmail(data.email);
+        const passwordError = validateString(data.password, "Senha", 8);
 
-        const invalidEmail = validateEmail(
-            data.email
-        );
-
-        const passwordError = validateString(
-            data.password,
-            "Senha",
-            8
-        );
-
-        if (
-            emailError ||
-            invalidEmail ||
-            passwordError
-        ) {
-
+        if (emailError || passwordError) {
             throw new AppError(
-                emailError ||
-                invalidEmail ||
-                passwordError,
+                emailError || passwordError,
                 400
             );
         }
@@ -104,22 +70,13 @@ export const authServices = {
         const user = await authRepository.findByEmail(email);
 
         if (!user) {
-            throw new AppError(
-                "Credenciais inválidas.",
-                401
-            );
+            throw new AppError("Credenciais inválidas.", 401);
         }
 
-        const passwordMatch = await bcrypt.compare(
-            password,
-            user.password
-        );
+        const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            throw new AppError(
-                "Credenciais inválidas.",
-                401
-            );
+            throw new AppError("Credenciais inválidas.", 401);
         }
 
         const token = generateToken(user.id);
@@ -133,4 +90,4 @@ export const authServices = {
             }
         };
     }
-}
+};
