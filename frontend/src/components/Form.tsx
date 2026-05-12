@@ -1,24 +1,59 @@
-import { type IFormProps } from '../types/allTypes'
+import {
+  type FieldErrors,
+  type UseFormHandleSubmit,
+  type UseFormRegister
+} from "react-hook-form";
 
-const Form = ({handleSubmit, title, setTitle, note, setNote}: IFormProps) => {
+import {
+  type NoteFormData
+} from "../schemas/notesSchema";
+
+type IFormProps = {
+  register: UseFormRegister<NoteFormData>;
+
+  handleSubmit: UseFormHandleSubmit<NoteFormData>;
+
+  onSubmit: (data: NoteFormData) => Promise<void>;
+
+  errors: FieldErrors<NoteFormData>;
+};
+
+const Form = ({
+  register,
+  handleSubmit,
+  onSubmit,
+  errors
+}: IFormProps) => {
+
   return (
-    <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Digite o título."
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-          />
 
-          <textarea
-            placeholder="Digite suas anotações."
-            value={note}
-            onChange={e => setNote(e.target.value)}
-          />
+    <form onSubmit={handleSubmit(onSubmit)}>
 
-          <button type="submit">Enviar</button>
-        </form>
-  )
-}
+      <input
+        type="text"
+        placeholder="Digite o título."
+        {...register("title")}
+      />
 
-export default Form
+      {errors.title && (
+        <p>{errors.title.message}</p>
+      )}
+
+      <textarea
+        placeholder="Digite suas anotações."
+        {...register("note")}
+      />
+
+      {errors.note && (
+        <p>{errors.note.message}</p>
+      )}
+
+      <button type="submit">
+        Enviar
+      </button>
+
+    </form>
+  );
+};
+
+export default Form;

@@ -42,6 +42,10 @@ const NoteCard = ({
             try {
                 setSaving(true);
 
+                if (!editTitle.trim() || !editNote.trim()) {
+                    return;
+                }
+
                 await update(noteId, {
                     title: editTitle,
                     note: editNote

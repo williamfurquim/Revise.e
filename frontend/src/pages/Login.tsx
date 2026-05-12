@@ -1,18 +1,33 @@
 import { useState } from 'react';
-import { login, register } from '../services/api';
+import { login, register as registerUser } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, registerSchema, type LoginFormData, type RegisterFormData } from '../schemas/authSchema';
+import { useForm } from "react-hook-form";
 
 const Login = () => {
 
-  const navigate = useNavigate();
+  const [loginOn, setLoginOn] = useState(true);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const currentSchema =
+    loginOn
+      ? loginSchema
+      : registerSchema;
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<LoginFormData | RegisterFormData>({
+    resolver: zodResolver(currentSchema)
+  }); // ferramentas do react-hook-form
+
+  const navigate = useNavigate();
 
   const [msg, setMsg] = useState('');
 
-  const [loginOn, setLoginOn] = useState(true);
+
 
   function showMessage(message: string) {
 
@@ -23,21 +38,13 @@ const Login = () => {
     }, 2500);
   }
 
-  async function handleLogin(e: any) {
-
-    e.preventDefault();
-
-    if (!email.trim() || !password.trim()) {
-      return showMessage(
-        'Insira corretamente os dados.'
-      );
-    }
+  async function handleLogin(data: LoginFormData) {
 
     try {
 
       const response = await login(
-        email,
-        password
+        data.email,
+        data.password
       );
 
       localStorage.setItem(
@@ -61,26 +68,14 @@ const Login = () => {
     }
   }
 
-  async function handleRegister(e: any) {
-
-    e.preventDefault();
-
-    if (
-      !name.trim() ||
-      !email.trim() ||
-      !password.trim()
-    ) {
-      return showMessage(
-        'Preencha todos os campos.'
-      );
-    }
+  async function handleRegister(data: RegisterFormData) {
 
     try {
 
-      await register(
-        name,
-        email,
-        password
+      await registerUser(
+        data.name,
+        data.email,
+        data.password
       );
 
       showMessage(
@@ -92,10 +87,6 @@ const Login = () => {
       }, 2500);
 
       setLoginOn(true);
-
-      setName('');
-      setEmail('');
-      setPassword('');
 
     } catch (err: any) {
 
@@ -112,8 +103,12 @@ const Login = () => {
       <form
         onSubmit={
           loginOn
-            ? handleLogin
-            : handleRegister
+            ? handleSubmit((data) =>
+              handleLogin(data as LoginFormData)
+            )
+            : handleSubmit((data) =>
+              handleRegister(data as RegisterFormData)
+            )
         }
       >
 
@@ -135,20 +130,22 @@ const Login = () => {
             <input
               type="email"
               placeholder='Digite seu E-mail.'
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              {...register("email")}
             />
+
+            {errors.email && (
+              <p>{errors.email.message}</p>
+            )}
 
             <input
               type="password"
               placeholder='Digite sua senha.'
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
+              {...register("password")}
             />
+
+            {errors.password && (
+              <p>{errors.password.message}</p>
+            )}
 
             <div className="options">
 
@@ -171,6 +168,8 @@ const Login = () => {
               type="button"
               onClick={() => {
 
+                reset()
+
                 setLoginOn(false);
 
                 setMsg('');
@@ -189,29 +188,32 @@ const Login = () => {
             <input
               type="text"
               placeholder='Digite seu nome.'
-              value={name}
-              onChange={(e) =>
-                setName(e.target.value)
-              }
+              {...register("name")}
             />
+
+            {"name" in errors && errors.name && (
+              <p>{errors.name.message}</p>
+            )}
 
             <input
               type="email"
               placeholder='Digite seu E-mail.'
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              {...register("email")}
             />
+
+            {errors.email && (
+              <p>{errors.email.message}</p>
+            )}
 
             <input
               type="password"
               placeholder='Digite sua senha.'
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
+              {...register("password")}
             />
+
+            {errors.password && (
+              <p>{errors.password.message}</p>
+            )}
 
             <button type='submit'>
               Registrar-se
@@ -220,6 +222,8 @@ const Login = () => {
             <button
               type="button"
               onClick={() => {
+
+                reset();
 
                 setLoginOn(true);
 

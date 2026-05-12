@@ -14,11 +14,3 @@ export interface INoteCardProps {
     search: string;
     setNotesList: React.Dispatch<React.SetStateAction<tyNotes[]>>
 }
-
-export interface IFormProps {
-    handleSubmit: (e: React.FormEvent) => void;
-    title: string;
-    setTitle: React.Dispatch<React.SetStateAction<string>>;
-    note: string;
-    setNote: React.Dispatch<React.SetStateAction<string>>;
-}

@@ -1,45 +1,35 @@
 import bcrypt from "bcrypt";
+
 import { authRepository } from "../repositories/authRepository.js";
+
 import { AppError } from "../errors/AppError.js";
+
 import { generateToken } from "../utils/jwt.js";
-import { validateString, validateEmail } from "../utils/validators.js";
 
 export const authServices = {
 
     async register(data) {
 
-        if (!data || typeof data !== "object") {
-            throw new AppError("Dados inválidos.", 400);
-        }
+        const userExists =
+            await authRepository.findByEmail(data.email);
 
-        const nameError = validateString(data.name, "Nome");
-        const passwordError = validateString(data.password, "Senha", 8);
-        const emailError = validateEmail(data.email);
+        if (userExists) {
 
-        if (nameError || passwordError || emailError) {
             throw new AppError(
-                nameError || passwordError || emailError,
-                400
+                "Email já cadastrado.",
+                409
             );
         }
 
-        const name = data.name.trim();
-        const email = data.email.trim();
-        const password = data.password.trim();
+        const hashedPassword =
+            await bcrypt.hash(data.password, 10);
 
-        const userExists = await authRepository.findByEmail(email);
-
-        if (userExists) {
-            throw new AppError("Email já cadastrado.", 409);
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const user = await authRepository.create({
-            name,
-            email,
-            password: hashedPassword
-        });
+        const user =
+            await authRepository.create({
+                name: data.name,
+                email: data.email,
+                password: hashedPassword
+            });
 
         return {
             id: user.id,
@@ -50,39 +40,38 @@ export const authServices = {
 
     async login(data) {
 
-        if (!data || typeof data !== "object") {
-            throw new AppError("Dados inválidos.", 400);
-        }
+        const user =
+            await authRepository.findByEmail(data.email);
 
-        const emailError = validateEmail(data.email);
-        const passwordError = validateString(data.password, "Senha", 8);
+        if (!user) {
 
-        if (emailError || passwordError) {
             throw new AppError(
-                emailError || passwordError,
-                400
+                "Credenciais inválidas.",
+                401
             );
         }
 
-        const email = data.email.trim();
-        const password = data.password.trim();
-
-        const user = await authRepository.findByEmail(email);
-
-        if (!user) {
-            throw new AppError("Credenciais inválidas.", 401);
-        }
-
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch =
+            await bcrypt.compare(
+                data.password,
+                user.password
+            );
 
         if (!passwordMatch) {
-            throw new AppError("Credenciais inválidas.", 401);
+
+            throw new AppError(
+                "Credenciais inválidas.",
+                401
+            );
         }
 
-        const token = generateToken(user.id);
+        const token =
+            generateToken(user.id);
 
         return {
+
             token,
+
             user: {
                 id: user.id,
                 name: user.name,
