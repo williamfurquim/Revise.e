@@ -1,0 +1,54 @@
+.auth-container {
+    min-height: 100vh;
+
+    background-image: url(../images/background-image.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+.auth-container form {
+    width: 100%;
+    max-width: 420px;
+
+    background: #28314572;
+    backdrop-filter: blur(3px);
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    border: 1px solid var(--border);
+
+    box-shadow: var(--shadow);
+}
+
+.auth-container h1 {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    text-align: center;
+}
+
+.auth-container img {
+    width: min(90%, 180px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.options input[type="checkbox"] {
+    width: auto;
+}

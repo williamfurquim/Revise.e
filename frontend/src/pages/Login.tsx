@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, registerSchema, type LoginFormData, type RegisterFormData } from '../schemas/authSchema';
 import { useForm } from "react-hook-form";
+import logoRevisee from '../images/logo-revisee.png'
 
 const Login = () => {
 
@@ -98,7 +99,7 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className="auth-container">
 
       <form
         onSubmit={
@@ -112,20 +113,16 @@ const Login = () => {
         }
       >
 
-        <h1>
-          Bem-vindo(a) ao Revise.e
-        </h1>
-
         <img
-          src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
-          height={150}
-          width={200}
-          alt=""
+          src={logoRevisee}
+          alt="logo Revise.e"
         />
 
         {loginOn ? (
 
           <>
+
+            <h1>Acesse a sua conta</h1>
 
             <input
               type="email"
@@ -215,6 +212,8 @@ const Login = () => {
               <p>{errors.password.message}</p>
             )}
 
+            <p>{msg}</p>
+
             <button type='submit'>
               Registrar-se
             </button>
@@ -238,8 +237,6 @@ const Login = () => {
         )}
 
       </form>
-
-      <p>{msg}</p>
 
     </div>
   );

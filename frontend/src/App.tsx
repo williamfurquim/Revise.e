@@ -1,9 +1,7 @@
-import React, {
+import {
   useState,
   useEffect
 } from 'react';
-
-import './App.css';
 
 import {
   get,

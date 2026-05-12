@@ -20,14 +20,24 @@ const SideBar = () => {
 
             <nav>
                 <ul>
-                    <li><Link to={'/api/notas'}>Anotações</Link></li>
-                    <li><Link to={'/api/configuracoes'}>Configurações</Link></li>
+                    <li><Link to={'/api/notas'}>
+                        <i className="fa-solid fa-notes-medical"></i>
+                        Anotações
+                    </Link></li>
+
+                    <li><Link to={'/api/configuracoes'}>
+                        <i className="fa-solid fa-gear"></i>
+                        Configurações
+                    </Link></li>
+
                     <li><a href="https://github.com/williamfurquim/Revisee"
                         target="_blank"
                         rel="noopener noreferrer">
                         {/* Evita vulnerabilidade de segurança */}
+                        <i className="fa-brands fa-github"></i>
                         GitHub
                     </a></li>
+
                     <li onClick={logout}>
                         <button>
                             Desconectar

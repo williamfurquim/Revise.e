@@ -5,14 +5,12 @@ const Configs = () => {
         <div className='layout'>
             <SideBar></SideBar>
 
-            <main>
+            <main className="configs-page">
                 <button style={{ marginRight: 10 }}>Alterar: modo claro</button>
                 <button style={{ marginRight: 10 }}>Trocar idioma</button>
 
                 <button style={{ marginRight: 10 }}>Alterar E-mail</button>
-                <button style={{ marginRight: 10 }}>Alterar senha</button>
-
-                
+                <button style={{ marginRight: 10 }}>Alterar senha</button>                
             </main>
         </div>
     )

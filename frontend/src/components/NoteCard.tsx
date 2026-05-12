@@ -137,18 +137,23 @@ const NoteCard = ({
                 <div className="modal">
                     <div className="modal-content">
 
-                        <button onClick={() => setNoteSelected(null)}>
-                            Fechar
-                        </button>
+                        <div className="modal-header">
 
-                        <button className="btn-excluir"
-                            onClick={() => {
-                                handleDelete(noteSelected.id);
-                                setNoteSelected(null)
-                            }}
-                        >
-                            Excluir
-                        </button>
+                            <button onClick={() => setNoteSelected(null)}>
+                                Fechar
+                            </button>
+
+                            <button
+                                className="btn-excluir"
+                                onClick={() => {
+                                    handleDelete(noteSelected.id);
+                                    setNoteSelected(null)
+                                }}
+                            >
+                                Excluir
+                            </button>
+
+                        </div>
 
                         <input
                             value={editTitle}
