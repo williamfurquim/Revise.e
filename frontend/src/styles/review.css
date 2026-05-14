@@ -43,7 +43,7 @@
 }
 
 .review-card h2 {
-    font-size: 2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
 
     line-height: 1.6;
 
@@ -56,6 +56,15 @@
     color: var(--text);
 
     line-height: 1.7;
+}
+
+.answer-p {
+    color: rgb(0, 121, 0);
+}
+
+.review-card h2,
+.answer-area p {
+  white-space: pre-wrap;
 }
 
 .review-card button {
@@ -110,10 +119,6 @@
 
     .review-card {
         padding: 24px;
-    }
-
-    .review-card h2 {
-        font-size: 1.5rem;
     }
 
     .review-card p {

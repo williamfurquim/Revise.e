@@ -1,10 +1,27 @@
 import { useEffect, useState } from "react";
-import SideBar from "../components/SideBar";
-import { api } from "../services/api";
-import { type ReviewCard } from "../types/allTypes";
 
+import SideBar from "../components/SideBar";
+
+import { api, get } from "../services/api";
+
+import {
+    type ReviewCard,
+    type tyNotes
+} from "../types/allTypes";
+
+import { formatPreview } from "../services/formatPreview";
 
 const Review = () => {
+
+    // =========================
+    // STATES
+    // =========================
+
+    const [notes, setNotes] =
+        useState<tyNotes[]>([]);
+
+    const [selectedNote, setSelectedNote] =
+        useState<number | null>(null);
 
     const [cards, setCards] =
         useState<ReviewCard[]>([]);
@@ -18,16 +35,20 @@ const Review = () => {
     const [showAnswer, setShowAnswer] =
         useState(false);
 
+    // =========================
+    // BUSCAR NOTAS
+    // =========================
+
     useEffect(() => {
 
-        async function fetchCards() {
+        async function fetchNotes() {
 
             try {
 
                 const response =
-                    await api.get("/review/due");
+                    await get();
 
-                setCards(response.data);
+                setNotes(response.data);
 
             } catch (err) {
 
@@ -39,17 +60,77 @@ const Review = () => {
             }
         }
 
-        fetchCards();
+        fetchNotes();
 
     }, []);
 
+    // =========================
+    // INICIAR REVISÃO
+    // =========================
+
+    async function startReview(
+        noteId: number
+    ) {
+
+        try {
+
+            setLoading(true);
+
+            const response =
+                await api.get(
+                    `/review/${noteId}`
+                );
+
+            setCards(response.data);
+
+            setSelectedNote(noteId);
+
+            setCurrentIndex(0);
+
+            setShowAnswer(false);
+
+        } catch (err) {
+
+            console.error(err);
+
+        } finally {
+
+            setLoading(false);
+        }
+    }
+
+    // =========================
+    // LOADING
+    // =========================
+
     if (loading) {
 
-        return <p>Carregando...</p>;
+        return (
+
+            <div className="layout">
+
+                <SideBar />
+
+                <main className="review-page">
+
+                    <h2>Carregando...</h2>
+
+                </main>
+
+            </div>
+        );
     }
+
+    // =========================
+    // CARD ATUAL
+    // =========================
 
     const currentCard =
         cards[currentIndex];
+
+    // =========================
+    // JSX
+    // =========================
 
     return (
 
@@ -59,13 +140,55 @@ const Review = () => {
 
             <main className="review-page">
 
-                <h1>Revisão Ativa</h1>
+                <h1>
+                    Revisão Ativa
+                </h1>
 
-                <p>
-                    Card {currentIndex + 1} de {cards.length}
-                </p>
+                {selectedNote === null ? (
 
-                {!currentCard ? (
+                    <>
+                        <p>
+                            Escolha uma anotação para revisar.
+                        </p>
+
+                        <section className="s-notes">
+
+                            {notes.length === 0 ? (
+
+                                <p>
+                                    Você ainda não possui anotações.
+                                </p>
+
+                            ) : (
+
+                                notes.map(note => (
+
+                                    <div
+                                        key={note.id}
+                                        className="note-card"
+                                        onClick={() =>
+                                            startReview(note.id)
+                                        }
+                                    >
+
+                                        <h2>
+                                            {note.title}
+                                        </h2>
+
+                                        <p
+                                            dangerouslySetInnerHTML={{
+                                                __html: formatPreview(note.note)
+                                            }}
+                                        />
+
+                                    </div>
+                                ))
+                            )}
+
+                        </section>
+                    </>
+
+                ) : !currentCard ? (
 
                     <div className="review-finished">
 
@@ -77,51 +200,78 @@ const Review = () => {
                             Nenhum card pendente.
                         </p>
 
+                        <button
+                            onClick={() => {
+
+                                setSelectedNote(null);
+
+                                setCards([]);
+
+                                setCurrentIndex(0);
+
+                                setShowAnswer(false);
+                            }}
+                        >
+                            Voltar para anotações
+                        </button>
+
                     </div>
 
                 ) : (
 
-                    <div className="review-card">
+                    <>
+                        <p>
+                            Card {currentIndex + 1} de {cards.length}
+                        </p>
 
-                        <h2>
-                            {currentCard.question}
-                        </h2>
+                        <div className="review-card">
 
-                        {!showAnswer ? (
+                            <h2
+                                dangerouslySetInnerHTML={{
+                                    __html: formatPreview(currentCard.question)
+                                }}
+                            />
 
-                            <button
-                                onClick={() =>
-                                    setShowAnswer(true)
-                                }
-                            >
-                                Mostrar resposta
-                            </button>
+                            {/* <h2>
+                                {currentCard.question}
+                            </h2> */}
 
-                        ) : (
-
-                            <div className="answer-area">
-
-                                <p>
-                                    {currentCard.answer}
-                                </p>
+                            {!showAnswer ? (
 
                                 <button
-                                    onClick={() => {
-
-                                        setCurrentIndex(
-                                            prev => prev + 1
-                                        );
-
-                                        setShowAnswer(false);
-                                    }}
+                                    onClick={() =>
+                                        setShowAnswer(true)
+                                    }
                                 >
-                                    Próximo
+                                    Mostrar resposta
                                 </button>
 
-                            </div>
-                        )}
+                            ) : (
 
-                    </div>
+                                <div className="answer-area">
+
+                                    <p>
+                                        Resposta: "<span className="answer-p">{currentCard.answer}</span>" ✅
+                                    </p>
+
+                                    <button
+                                        onClick={() => {
+
+                                            setCurrentIndex(
+                                                prev => prev + 1
+                                            );
+
+                                            setShowAnswer(false);
+                                        }}
+                                    >
+                                        Próximo
+                                    </button>
+
+                                </div>
+                            )}
+
+                        </div>
+                    </>
                 )}
 
             </main>

@@ -28,5 +28,22 @@ export const reviewRepository = {
                 nextReview: "asc"
             }
         });
+    },
+
+    findCardsByNote(noteId, userId) {
+        return prisma.reviewCard.findMany({
+            where: {
+
+                noteId,
+
+                note: {
+                    userId
+                }
+            },
+
+            orderBy: {
+                createdAt: "asc"
+            }
+        })
     }
 };

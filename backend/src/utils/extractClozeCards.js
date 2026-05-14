@@ -4,20 +4,29 @@ export function extractClozeCards(note) {
 
     const matches = [...note.matchAll(regex)];
 
-    return matches.map(match => {
+    return matches.map((match) => {
 
-        const fullMatch = match[0];
+        const currentAnswer = match[1];
 
-        const answer = match[1];
+        let hiddenIndex = 0;
 
         const question = note.replace(
-            fullMatch,
-            "______"
+            regex,
+            (_, content) => {
+
+                hiddenIndex++;
+
+                if (content === currentAnswer) {
+                    return "______";
+                }
+
+                return "{{?}}";
+            }
         );
 
         return {
             question,
-            answer
+            answer: currentAnswer
         };
     });
 }

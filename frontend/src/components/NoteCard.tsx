@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 import { update } from "../services/api";
 import { type INoteCardProps } from "../types/allTypes";
+import { formatPreview } from "../services/formatPreview";
 
 const NoteCard = ({
     notesList,
@@ -116,7 +117,11 @@ const NoteCard = ({
                             onClick={() => setNoteSelected(not)}
                         >
                             <h2>{not.title}</h2>
-                            <p>{not.note}</p>
+                            <p
+                                dangerouslySetInnerHTML={{
+                                    __html: formatPreview(not.note)
+                                }}
+                            />
 
                             <button
                                 onClick={(e) => {
