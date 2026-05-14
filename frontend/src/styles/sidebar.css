@@ -22,7 +22,7 @@ aside {
 
   margin-bottom: 40px;
 
-  color: white;
+  color: var(--text);
 }
 
 aside nav ul {
@@ -39,7 +39,7 @@ aside li {
 
 aside a:hover,
 aside li:hover {
-  color: white;
+  color: var(--primary);
 }
 
 aside button {
