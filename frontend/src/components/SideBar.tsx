@@ -25,6 +25,11 @@ const SideBar = () => {
                         Anotações
                     </Link></li>
 
+                    <li><Link to={'/api/revisao'}>
+                        <i className="fa-solid fa-brain"></i>
+                        Revisão
+                    </Link></li>
+
                     <li><Link to={'/api/configuracoes'}>
                         <i className="fa-solid fa-gear"></i>
                         Configurações

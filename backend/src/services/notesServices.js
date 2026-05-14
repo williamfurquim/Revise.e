@@ -1,8 +1,8 @@
 import { notesRepository } from "../repositories/notesRepository.js";
-
 import { AppError } from "../errors/AppError.js";
-
 import { validateId } from "../utils/validators.js";
+import { reviewRepository } from "../repositories/reviewRepository.js";
+import { extractClozeCards } from "../utils/extractClozeCards.js";
 
 export const notesServices = {
 
@@ -13,11 +13,29 @@ export const notesServices = {
 
     async create(data, userId) {
 
-        return notesRepository.create({
+        const note = await notesRepository.create({
             title: data.title,
             note: data.note,
             userId
         });
+
+        const cards =
+            extractClozeCards(data.note);
+            console.log(cards);
+
+        if (cards.length > 0) {
+
+            await reviewRepository.createMany(
+
+                cards.map(card => ({
+                    question: card.question,
+                    answer: card.answer,
+                    noteId: note.id
+                }))
+            );
+        }
+
+        return note;
     },
 
     async update(id, userId, data) {

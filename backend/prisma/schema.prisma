@@ -29,6 +29,25 @@ model Note {
   userId    Int
   user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  reviewCards ReviewCard[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ReviewCard {
+  id Int @id @default(autoincrement())
+
+  noteId Int
+  note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  question String
+  answer String
+
+  interval Int @default(1)
+
+  nextReview DateTime @default(now())
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

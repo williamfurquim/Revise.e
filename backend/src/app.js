@@ -5,6 +5,7 @@ import cors from 'cors';
 import { notesRouter } from './routes/notesRoutes.js';
 import { errorHandler } from './middlewares/errorMiddleware.js';
 import { authRouter } from "./routes/authRoutes.js";
+import { reviewRouter } from "./routes/reviewRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000; 
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use('/api/auth', authRouter);
 app.use('/api', notesRouter);
+app.use('/api', reviewRouter);
 app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

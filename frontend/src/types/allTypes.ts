@@ -14,3 +14,9 @@ export interface INoteCardProps {
     search: string;
     setNotesList: React.Dispatch<React.SetStateAction<tyNotes[]>>
 }
+
+export type ReviewCard = {
+    id: number;
+    question: string;
+    answer: string;
+};
