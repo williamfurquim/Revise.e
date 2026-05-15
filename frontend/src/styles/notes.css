@@ -185,4 +185,11 @@
 .cloze-answer {
   color: #facc15;
   font-weight: 700;
+  animation: piscar 3s infinite;
+}
+
+@keyframes piscar {
+  0% { color: #facc15; }
+  50% { color: #fa6115; }
+  100% { color: #facc15; }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import SideBar from "../components/SideBar";
 
@@ -35,6 +35,8 @@ const Review = () => {
     const [showAnswer, setShowAnswer] =
         useState(false);
 
+    const lineRef = useRef<HTMLDivElement | null>(null);
+
     // =========================
     // BUSCAR NOTAS
     // =========================
@@ -63,6 +65,19 @@ const Review = () => {
         fetchNotes();
 
     }, []);
+
+    useEffect(() => {
+        if (!lineRef.current) return;
+
+        const element = lineRef.current.querySelector("#active-cloze");
+
+        if (element) {
+            element.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }
+    }, [currentIndex])
 
     // =========================
     // INICIAR REVISÃO
@@ -220,38 +235,53 @@ const Review = () => {
                 ) : (
 
                     <>
-                        <p>
-                            Card {currentIndex + 1} de {cards.length}
-                        </p>
+                        <div className="review-card" ref={lineRef}>
 
-                        <div className="review-card">
+                            <div className="review-content">
 
-                            <h2
-                                dangerouslySetInnerHTML={{
-                                    __html: formatPreview(currentCard.question)
-                                }}
-                            />
 
-                            {/* <h2>
-                                {currentCard.question}
-                            </h2> */}
+                                <h2
+                                    dangerouslySetInnerHTML={{
+                                        __html: formatPreview(
+                                            currentCard.question,
+                                            currentCard.answer,
+                                            showAnswer
+                                        )
+                                    }}
+                                />
+
+                            </div>
 
                             {!showAnswer ? (
+                                <div className="answer-area">
 
-                                <button
-                                    onClick={() =>
-                                        setShowAnswer(true)
-                                    }
-                                >
-                                    Mostrar resposta
-                                </button>
+                                    <h3 className="stage">
+                                        {currentIndex + 1} de {cards.length}
+                                    </h3>
 
+                                    <p className="answer-text">
+                                        Lembre-se da palavra oculta
+                                    </p>
+
+                                    <button
+                                        onClick={() =>
+                                            setShowAnswer(true)
+                                        }
+                                    >
+                                        Mostrar resposta
+                                    </button>
+
+                                </div>
                             ) : (
 
                                 <div className="answer-area">
 
+                                    <h3 className="stage">
+                                        {currentIndex + 1} de {cards.length}
+                                    </h3>
+
                                     <p>
-                                        Resposta: "<span className="answer-p">{currentCard.answer}</span>" ✅
+                                        Resposta: <span className="answer-p">{currentCard.answer}</span> ✅
                                     </p>
 
                                     <button

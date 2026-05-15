@@ -1,5 +1,7 @@
 export function formatPreview(
-    text: string
+    text: string,
+    answer?: string,
+    reveal: boolean = false
 ) {
 
     return text
@@ -19,6 +21,9 @@ export function formatPreview(
         // lacuna ativa
         .replace(
             /______/g,
-            "<span class='cloze-answer'>______</span>"
+            reveal
+            ? `<span class='cloze-answer'>${answer}</span>`
+            : "<span class='cloze-answer' id='active-cloze'>______</span>"
+            
         );
 }
