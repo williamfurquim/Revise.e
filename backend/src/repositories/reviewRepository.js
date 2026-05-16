@@ -45,5 +45,19 @@ export const reviewRepository = {
                 createdAt: "asc"
             }
         })
+    },
+
+    updateReviewCount(noteId, userId) {
+        return prisma.note.updateMany({
+            where: { 
+                id: noteId, 
+                userId
+            },
+            data: {
+                reviewCount: {
+                    increment: 1
+                }
+            }
+        });
     }
 };

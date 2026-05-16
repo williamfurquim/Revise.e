@@ -61,6 +61,12 @@
   line-height: 1.5;
 }
 
+.status {
+  font-size: 0.95rem;
+  color: var(--status);
+  margin-top: 10px;
+}
+
 .note-card > button {
   margin-top: 14px;
 }

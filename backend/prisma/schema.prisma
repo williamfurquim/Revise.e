@@ -30,6 +30,7 @@ model Note {
   user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   reviewCards ReviewCard[]
+  reviewCount Int @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

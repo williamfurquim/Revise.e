@@ -75,3 +75,6 @@ export const register = (
         email,
         password
     });
+
+export const patch = (id: number) =>
+    api.patch(`/review/${id}/review-count`);

@@ -12,5 +12,12 @@ export const reviewServices = {
             noteId,
             userId
         )
+    },
+
+    async incrementReviewCount(noteId, userId){
+        return reviewRepository.updateReviewCount(
+            noteId,
+            userId
+        )
     }
 }

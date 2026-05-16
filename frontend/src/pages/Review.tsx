@@ -11,6 +11,8 @@ import {
 
 import { formatPreview } from "../services/formatPreview";
 
+import { patch } from "../services/api";
+
 const Review = () => {
 
     // =========================
@@ -41,30 +43,47 @@ const Review = () => {
     // BUSCAR NOTAS
     // =========================
 
+    async function fetchNotes() {
+
+        try {
+
+            const response =
+                await get();
+
+            setNotes(response.data);
+
+        } catch (err) {
+
+            console.error(err);
+
+        } finally {
+
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchNotes();
+    }, []);
+
     useEffect(() => {
 
-        async function fetchNotes() {
+        async function finishReview() {
 
-            try {
+            if (
+                selectedNote !== null &&
+                currentIndex >= cards.length &&
+                cards.length > 0
+            ) {
 
-                const response =
-                    await get();
-
-                setNotes(response.data);
-
-            } catch (err) {
-
-                console.error(err);
-
-            } finally {
-
-                setLoading(false);
+                await patch(selectedNote);
+                await fetchNotes();
             }
         }
 
-        fetchNotes();
+        finishReview();
 
-    }, []);
+    }, [currentIndex]);
 
     useEffect(() => {
         if (!lineRef.current) return;
@@ -190,11 +209,18 @@ const Review = () => {
                                             {note.title}
                                         </h2>
 
-                                        <p
+                                        <p className="note-text"
                                             dangerouslySetInnerHTML={{
                                                 __html: formatPreview(note.note)
                                             }}
                                         />
+
+                                        {note.reviewCount > 1
+                                            ? <h4 className="status">Revisado {note.reviewCount} vezes 🔥</h4>
+                                            : note.reviewCount === 0
+                                                ? <h4 className="status">Não revisado ✖️</h4>
+                                                : <h4 className="status">Revisado {note.reviewCount} vez 🔥</h4>
+                                        }
 
                                     </div>
                                 ))
@@ -225,6 +251,7 @@ const Review = () => {
                                 setCurrentIndex(0);
 
                                 setShowAnswer(false);
+
                             }}
                         >
                             Voltar para anotações

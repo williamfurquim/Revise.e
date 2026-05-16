@@ -23,10 +23,12 @@
   --radius: 12px;
 
   --transition: 0.2s ease;
+
+  --status: #c8c8c8;
 }
 
 .white-theme {
-   --bg: #d8d8d8;
+  --bg: #d8d8d8;
   --bg-secondary: #ffffff;
 
   --card: #ffffff;
@@ -48,6 +50,8 @@
   --radius: 12px;
 
   --transition: 0.2s ease;
+
+  --status: #111827;
 }
 
 * {
