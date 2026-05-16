@@ -38,15 +38,13 @@ const SideBar = () => {
                     <li><a href="https://github.com/williamfurquim/Revisee"
                         target="_blank"
                         rel="noopener noreferrer">
-                        {/* Evita vulnerabilidade de segurança */}
                         <i className="fa-brands fa-github"></i>
                         GitHub
                     </a></li>
 
                     <li onClick={logout}>
-                        <button>
-                            Desconectar
-                        </button>
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                        Desconectar
                     </li>
                 </ul>
             </nav>

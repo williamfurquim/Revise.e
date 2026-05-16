@@ -32,7 +32,7 @@ textarea:focus {
 }
 
 textarea {
-  min-height: 120px;
+  min-height: 220px;
   resize: vertical;
 }
 

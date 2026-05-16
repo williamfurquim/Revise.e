@@ -35,15 +35,12 @@ aside a,
 aside li {
   color: var(--muted);
   transition: var(--transition);
+  cursor: pointer;
 }
 
 aside a:hover,
 aside li:hover {
   color: var(--primary);
-}
-
-aside button {
-  width: 100%;
 }
 
 i {
