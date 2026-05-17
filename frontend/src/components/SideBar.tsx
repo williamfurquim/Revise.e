@@ -20,31 +20,41 @@ const SideBar = () => {
 
             <nav>
                 <ul>
-                    <li><Link to={'/api/notas'}>
-                        <i className="fa-solid fa-notes-medical"></i>
-                        Anotações
-                    </Link></li>
+                    <li>
+                        <Link to={'/api/notas'}>
+                            <i className="fa-solid fa-notes-medical"></i>
+                            Anotações
+                        </Link>
+                    </li>
 
-                    <li><Link to={'/api/revisao'}>
-                        <i className="fa-solid fa-brain"></i>
-                        Revisão
-                    </Link></li>
+                    <li>
+                        <Link to={'/api/revisao'}>
+                            <i className="fa-solid fa-brain"></i>
+                            Revisão
+                        </Link>
+                    </li>
 
-                    <li><Link to={'/api/configuracoes'}>
-                        <i className="fa-solid fa-gear"></i>
-                        Configurações
-                    </Link></li>
+                    <li>
+                        <Link to={'/api/configuracoes'}>
+                            <i className="fa-solid fa-gear"></i>
+                            Configurações
+                        </Link>
+                    </li>
 
-                    <li><a href="https://github.com/williamfurquim/Revisee"
+                    <li>
+                        <a href="https://github.com/williamfurquim/Revisee"
                         target="_blank"
                         rel="noopener noreferrer">
-                        <i className="fa-brands fa-github"></i>
-                        GitHub
-                    </a></li>
+                                <i className="fa-brands fa-github"></i>
+                                GitHub
+                        </a>
+                    </li>
 
                     <li onClick={logout}>
-                        <i className="fa-solid fa-right-from-bracket"></i>
-                        Desconectar
+                        <a style={{ cursor: "pointer" }}>
+                            <i className="fa-solid fa-right-from-bracket"></i>
+                            Desconectar
+                        </a>
                     </li>
                 </ul>
             </nav>

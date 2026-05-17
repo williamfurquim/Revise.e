@@ -114,7 +114,13 @@ const NoteCard = ({
                         <div
                             key={not.id}
                             className="note-card"
-                            onClick={() => setNoteSelected(not)}
+                            onClick={(e) => {
+                                const target = e.target as HTMLElement;
+
+                                if (target.closest("button")) return;
+
+                                setNoteSelected(not);
+                            }}
                         >
                             <h2>{not.title}</h2>
                             <p
@@ -126,7 +132,10 @@ const NoteCard = ({
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    handleDelete(not.id);
+                                    const confirmed = confirm('Sua anotação será excluída pra sempre (muito tempo).');
+                                    if (confirmed) {
+                                        handleDelete(not.id);
+                                    }
                                 }}
                             >
                                 Excluir
@@ -151,8 +160,11 @@ const NoteCard = ({
                             <button
                                 className="btn-excluir"
                                 onClick={() => {
-                                    handleDelete(noteSelected.id);
-                                    setNoteSelected(null)
+                                    const confirmed = confirm('Sua anotação será excluída pra sempre (muito tempo).');
+                                    if (confirmed) {
+                                        handleDelete(noteSelected.id);
+                                        setNoteSelected(null);
+                                    }                                   
                                 }}
                             >
                                 Excluir

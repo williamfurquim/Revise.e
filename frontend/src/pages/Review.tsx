@@ -133,6 +133,17 @@ const Review = () => {
         }
     }
 
+    function cancelReview() {
+
+        setSelectedNote(null);
+
+        setCards([]);
+
+        setCurrentIndex(0);
+
+        setShowAnswer(false);
+    }
+
     // =========================
     // LOADING
     // =========================
@@ -290,13 +301,24 @@ const Review = () => {
                                         Lembre-se da palavra oculta
                                     </p>
 
-                                    <button
-                                        onClick={() =>
-                                            setShowAnswer(true)
-                                        }
-                                    >
-                                        Mostrar resposta
-                                    </button>
+                                    <div className="review-actions">
+
+                                        <button
+                                            onClick={() =>
+                                                setShowAnswer(true)
+                                            }
+                                        >
+                                            Mostrar resposta
+                                        </button>
+
+                                        <button
+                                            className="btn-cancel"
+                                            onClick={cancelReview}
+                                        >
+                                            Cancelar
+                                        </button>
+
+                                    </div>
 
                                 </div>
                             ) : (
@@ -311,18 +333,29 @@ const Review = () => {
                                         Resposta: <span className="answer-p">{currentCard.answer}</span> ✅
                                     </p>
 
-                                    <button
-                                        onClick={() => {
+                                    <div className="review-actions">
 
-                                            setCurrentIndex(
-                                                prev => prev + 1
-                                            );
+                                        <button
+                                            onClick={() => {
 
-                                            setShowAnswer(false);
-                                        }}
-                                    >
-                                        Próximo
-                                    </button>
+                                                setCurrentIndex(
+                                                    prev => prev + 1
+                                                );
+
+                                                setShowAnswer(false);
+                                            }}
+                                        >
+                                            Próximo
+                                        </button>
+
+                                        <button
+                                            className="btn-cancel"
+                                            onClick={cancelReview}
+                                        >
+                                            Cancelar
+                                        </button>
+
+                                    </div>
 
                                 </div>
                             )}
