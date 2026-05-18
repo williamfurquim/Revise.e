@@ -42,7 +42,7 @@ const SideBar = () => {
                     </li>
 
                     <li>
-                        <a href="https://github.com/williamfurquim/Revisee"
+                        <a href="https://github.com/williamfurquim/Revise.e"
                         target="_blank"
                         rel="noopener noreferrer">
                                 <i className="fa-brands fa-github"></i>
