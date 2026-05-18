@@ -11,16 +11,12 @@ export function errorHandler(err, req, res, next) {
     }
 
     if (err.isOperational) {
-
         return res.status(err.statusCode).json({
             error: err.message
         });
     }
 
-    if (
-        err instanceof Prisma.PrismaClientKnownRequestError
-    ) {
-
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
         return res.status(400).json({
             error: "Erro no banco de dados."
         });

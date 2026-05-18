@@ -5,7 +5,6 @@ export function validate(schema) {
         const result = schema.safeParse(req.body);
 
         if (!result.success) {
-
             return res.status(400).json({
                 error: "Dados inválidos.",
                 details: result.error.flatten()
@@ -13,7 +12,6 @@ export function validate(schema) {
         }
 
         req.body = result.data;
-
         next();
     };
 }

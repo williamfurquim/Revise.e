@@ -1,9 +1,4 @@
-export function validateString(
-    value,
-    fieldName,
-    min = 1,
-    max = 255
-) {
+export function validateString(value, fieldName, min = 1, max = 255) {
 
     if (typeof value !== "string") {
         return `${fieldName} deve ser uma string.`;

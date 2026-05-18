@@ -3,7 +3,6 @@ import { reviewRepository } from "../repositories/reviewRepository.js";
 export const reviewServices = {
 
     async getDueCards(userId) {
-
         return reviewRepository.findDueCards(userId);
     },
 
@@ -11,13 +10,13 @@ export const reviewServices = {
         return reviewRepository.findCardsByNote(
             noteId,
             userId
-        )
+        );
     },
 
     async incrementReviewCount(noteId, userId){
         return reviewRepository.updateReviewCount(
             noteId,
             userId
-        )
+        );
     }
-}
+};

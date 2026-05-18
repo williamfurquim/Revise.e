@@ -1,7 +1,6 @@
 export function extractClozeCards(note) {
 
     const regex = /{{(.*?)}}/g;
-
     const matches = [...note.matchAll(regex)];
 
     return matches.map((match) => {

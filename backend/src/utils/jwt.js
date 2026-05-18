@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 import { AppError } from "../errors/AppError.js";
 
 const JWT_CONFIG = {
@@ -10,10 +9,7 @@ const JWT_CONFIG = {
 export function generateToken(userId) {
 
     if (!userId) {
-        throw new AppError(
-            "Usuário inválido.",
-            500
-        );
+        throw new AppError("Usuário inválido.", 500);
     }
 
     return jwt.sign(

@@ -37,6 +37,8 @@ app.use(cors({
     credentials: true
 }));
 
+// ======== ROTAS ========
+
 app.get("/", (req, res) => {
     res.json({
         status: "Deploy Ok"
@@ -47,5 +49,6 @@ app.use('/api/auth', authRouter);
 app.use('/api', notesRouter);
 app.use('/api', reviewRouter);
 app.use(errorHandler);
+
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

@@ -3,7 +3,6 @@ import { Router } from "express";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import { validate } from "../middlewares/validateMiddleware.js";
 import { createNoteSchema, updateNoteSchema } from "../schemas/notesSchema.js";
-
 export const notesRouter = Router();
 
 notesRouter.get('/notes', authMiddleware, getNotes);
