@@ -10,16 +10,21 @@ const Login = () => {
 
   const [loginOn, setLoginOn] = useState(true);
 
-  const currentSchema = loginOn ? loginSchema : registerSchema;
+  const loginForm = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  });
 
-  // Ferramentas do react-hook-form
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors }
-  } = useForm<LoginFormData | RegisterFormData>({
-    resolver: zodResolver(currentSchema)
+  const registerForm = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: ""
+    }
   });
 
   const navigate = useNavigate();
@@ -69,13 +74,14 @@ const Login = () => {
         data.password
       );
 
-      showMessage(
-        'Conta criada com sucesso.'
-      );
+      showMessage('Conta criada com sucesso.');
 
-      setTimeout(() => {
-        navigate('/auth/login');
-      }, 2500);
+      loginForm.reset({
+        email: data.email,
+        password: ""
+      });
+
+      registerForm.reset();
 
       setLoginOn(true);
 
@@ -94,12 +100,8 @@ const Login = () => {
       <form
         onSubmit={
           loginOn
-            ? handleSubmit((data) =>
-              handleLogin(data as LoginFormData)
-            )
-            : handleSubmit((data) =>
-              handleRegister(data as RegisterFormData)
-            )
+            ? loginForm.handleSubmit(handleLogin)
+            : registerForm.handleSubmit(handleRegister)
         }
       >
 
@@ -117,21 +119,21 @@ const Login = () => {
             <input
               type="email"
               placeholder='Digite seu E-mail.'
-              {...register("email")}
+              {...loginForm.register("email")}
             />
 
-            {errors.email && (
-              <p>{errors.email.message}</p>
+            {loginForm.formState.errors.email && (
+              <p>{loginForm.formState.errors.email.message}</p>
             )}
 
             <input
               type="password"
               placeholder='Digite sua senha.'
-              {...register("password")}
+              {...loginForm.register("password")}
             />
 
-            {errors.password && (
-              <p>{errors.password.message}</p>
+            {loginForm.formState.errors.password && (
+              <p>{loginForm.formState.errors.password.message}</p>
             )}
 
             <div className="options">
@@ -147,6 +149,8 @@ const Login = () => {
 
             </div>
 
+            {msg && <p>{msg}</p>}
+
             <button type='submit'>
               Entrar
             </button>
@@ -155,7 +159,9 @@ const Login = () => {
               type="button"
               onClick={() => {
 
-                reset()
+                loginForm.reset();
+
+                registerForm.reset();
 
                 setLoginOn(false);
 
@@ -175,31 +181,31 @@ const Login = () => {
             <input
               type="text"
               placeholder='Digite seu nome.'
-              {...register("name")}
+              {...registerForm.register("name")}
             />
 
-            {"name" in errors && errors.name && (
-              <p>{errors.name.message}</p>
+            {registerForm.formState.errors.name && (
+              <p>{registerForm.formState.errors.name.message}</p>
             )}
 
             <input
               type="email"
               placeholder='Digite seu E-mail.'
-              {...register("email")}
+              {...registerForm.register("email")}
             />
 
-            {errors.email && (
-              <p>{errors.email.message}</p>
+            {registerForm.formState.errors.email && (
+              <p>{registerForm.formState.errors.email.message}</p>
             )}
 
             <input
               type="password"
               placeholder='Digite sua senha.'
-              {...register("password")}
+              {...registerForm.register("password")}
             />
 
-            {errors.password && (
-              <p>{errors.password.message}</p>
+            {registerForm.formState.errors.password && (
+              <p>{registerForm.formState.errors.password.message}</p>
             )}
 
             <p>{msg}</p>
@@ -212,7 +218,9 @@ const Login = () => {
               type="button"
               onClick={() => {
 
-                reset();
+                loginForm.reset();
+
+                registerForm.reset();
 
                 setLoginOn(true);
 
