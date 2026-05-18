@@ -12,13 +12,13 @@ const NoteCard = ({
     setNotesList
 }: INoteCardProps) => {
 
-    // estados locais de edição
+    //Eestados locais de edição
     const [editTitle, setEditTitle] = useState("");
     const [editNote, setEditNote] = useState("");
 
     const [saving, setSaving] = useState(false);
 
-    // sincroniza quando seleciona outra nota
+    // Sincroniza quando seleciona outra nota
     useEffect(() => {
         if (noteSelected) {
             setEditTitle(noteSelected.title);
@@ -26,7 +26,7 @@ const NoteCard = ({
         }
     }, [noteSelected]);
 
-    // auto-save com debounce + proteção
+    // Auto-save com debounce + proteção
     useEffect(() => {
         if (!noteSelected) return;
 
@@ -35,10 +35,7 @@ const NoteCard = ({
 
         const timeout = setTimeout(async () => {
 
-            if (
-                editTitle === noteSelected.title &&
-                editNote === noteSelected.note
-            ) return;
+            if (editTitle === noteSelected.title && editNote === noteSelected.note) return;
 
             try {
                 setSaving(true);
@@ -72,7 +69,6 @@ const NoteCard = ({
             } finally {
                 if (!isCancelled) setSaving(false);
             }
-
         }, 500);
 
         return () => {
@@ -82,7 +78,7 @@ const NoteCard = ({
 
     }, [editTitle, editNote, noteSelected, setNotesList]);
 
-    // filtro inteligente
+    // Filtro inteligente
     const normalize = useCallback((text: string) => {
         return text
             .toLowerCase()
@@ -92,7 +88,7 @@ const NoteCard = ({
             .trim();
     }, []);
 
-    // filtro da search
+    // Filtro da search
     const filtered = useMemo(() => {
         const normalizedSearch = normalize(search);
 
@@ -120,14 +116,12 @@ const NoteCard = ({
                                 if (target.closest("button")) return;
 
                                 setNoteSelected(not);
-                            }}
-                        >
+                            }}>
+
                             <h2>{not.title}</h2>
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html: formatPreview(not.note)
-                                }}
-                            />
+                            <p dangerouslySetInnerHTML={{
+                                __html: formatPreview(not.note)
+                            }} />
 
                             <button
                                 onClick={(e) => {
@@ -136,8 +130,7 @@ const NoteCard = ({
                                     if (confirmed) {
                                         handleDelete(not.id);
                                     }
-                                }}
-                            >
+                                }}>
                                 Excluir
                             </button>
                         </div>
@@ -145,8 +138,8 @@ const NoteCard = ({
                 ) : (
                     <p>Não há tarefas.</p>
                 )}
-            </section>
 
+            </section>
             {noteSelected && (
                 <div className="modal">
                     <div className="modal-content">
@@ -164,12 +157,11 @@ const NoteCard = ({
                                     if (confirmed) {
                                         handleDelete(noteSelected.id);
                                         setNoteSelected(null);
-                                    }                                   
+                                    }
                                 }}
                             >
                                 Excluir
                             </button>
-
                         </div>
 
                         <input

@@ -1,16 +1,15 @@
 import { z } from "zod";
 
-export type NoteFormData =
-  z.infer<typeof noteSchema>;
+export type NoteFormData = z.infer<typeof noteSchema>;
 
 export const noteSchema = z.object({
-    title: z
+  title: z
     .string()
     .trim()
     .min(1, "Título é obrigatório.")
     .max(60, "Título muito grande."),
 
-    note: z
+  note: z
     .string()
     .trim()
     .min(1, "Digite algo para salvar.")

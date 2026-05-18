@@ -9,8 +9,6 @@ const SideBar = () => {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             navigate('/auth/login');
-        } else {
-            return
         }
     }
 
@@ -45,8 +43,8 @@ const SideBar = () => {
                         <a href="https://github.com/williamfurquim/Revise.e"
                         target="_blank"
                         rel="noopener noreferrer">
-                                <i className="fa-brands fa-github"></i>
-                                GitHub
+                            <i className="fa-brands fa-github"></i>
+                            GitHub
                         </a>
                     </li>
 

@@ -226,9 +226,9 @@ const Review = () => {
                                             }}
                                         />
 
-                                        {note.reviewCount ?? 0 > 1
+                                        {(note.reviewCount ?? 0) > 1
                                             ? <h4 className="status">Revisado {note.reviewCount ?? 0} vezes 🔥</h4>
-                                            : note.reviewCount ?? 0 === 0
+                                            : (note.reviewCount ?? 0) === 0
                                                 ? <h4 className="status">Não revisado ✖️</h4>
                                                 : <h4 className="status">Revisado {note.reviewCount ?? 0} vez 🔥</h4>
                                         }

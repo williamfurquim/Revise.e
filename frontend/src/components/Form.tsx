@@ -1,20 +1,10 @@
-import {
-  type FieldErrors,
-  type UseFormHandleSubmit,
-  type UseFormRegister
-} from "react-hook-form";
-
-import {
-  type NoteFormData
-} from "../schemas/notesSchema";
+import { type FieldErrors, type UseFormHandleSubmit, type UseFormRegister } from "react-hook-form";
+import { type NoteFormData } from "../schemas/notesSchema";
 
 type IFormProps = {
   register: UseFormRegister<NoteFormData>;
-
   handleSubmit: UseFormHandleSubmit<NoteFormData>;
-
   onSubmit: (data: NoteFormData) => Promise<void>;
-
   errors: FieldErrors<NoteFormData>;
 };
 
@@ -26,7 +16,6 @@ const Form = ({
 }: IFormProps) => {
 
   return (
-
     <form onSubmit={handleSubmit(onSubmit)}>
 
       <input

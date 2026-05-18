@@ -1,34 +1,12 @@
-import {
-  useState,
-  useEffect
-} from 'react';
-
-import {
-  get,
-  post,
-  remove
-} from './services/api';
-
-import {
-  type tyNotes
-} from './types/allTypes';
-
+import { useState, useEffect } from 'react';
+import { get, post, remove } from './services/api';
+import { type tyNotes } from './types/allTypes';
 import SideBar from './components/SideBar.js';
-
 import Form from './components/Form.tsx';
-
 import NoteCard from './components/NoteCard.tsx';
-
 import { useForm } from 'react-hook-form';
-
-import {
-  zodResolver
-} from '@hookform/resolvers/zod';
-
-import {
-  noteSchema,
-  type NoteFormData
-} from './schemas/notesSchema.ts';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { noteSchema, type NoteFormData } from './schemas/notesSchema.ts';
 
 function App() {
 
@@ -41,63 +19,39 @@ function App() {
     resolver: zodResolver(noteSchema)
   });
 
-  const [notesList, setNotesList] =
-    useState<tyNotes[]>([]);
+  const [notesList, setNotesList] = useState<tyNotes[]>([]);
+  const [noteSelected, setNoteSelected] = useState<tyNotes | null>(null);
 
-  const [noteSelected, setNoteSelected] =
-    useState<tyNotes | null>(null);
-
-  const [search, setSearch] =
-    useState("");
+  const [search, setSearch] = useState("");
 
   let totalList = notesList.length;
 
-  const user = JSON.parse(
-    localStorage.getItem("user") || "{}"
-  );
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   async function getApi() {
-
     try {
-
       const response = await get();
-
       setNotesList(response.data);
-
     } catch (err) {
-
       console.error(err);
-
     }
   }
 
   useEffect(() => {
-
     getApi();
-
   }, []);
 
   async function handleDelete(id: number) {
-
     try {
-
       await remove(id);
-
       getApi();
-
     } catch (err) {
-
       console.error(err);
-
     }
   }
 
-  async function onSubmit(
-    data: NoteFormData
-  ) {
-
+  async function onSubmit(data: NoteFormData) {
     try {
-
       const postApi = await post(data);
 
       setNotesList(prev => [
@@ -106,11 +60,8 @@ function App() {
       ]);
 
       reset();
-
     } catch (err) {
-
       console.error(err);
-
     }
   }
 
@@ -157,7 +108,6 @@ function App() {
         />
 
       </main>
-
     </div>
   );
 }

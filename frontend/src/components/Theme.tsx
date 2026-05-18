@@ -16,8 +16,10 @@ export function Theme() {
   }, [isDark]);
 
   return (
+
     <button onClick={() => setIsDark(!isDark)}>
       Ativar modo {isDark ? 'claro' : 'escuro'}
     </button>
+    
   );
 }

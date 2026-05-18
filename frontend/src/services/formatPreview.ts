@@ -22,8 +22,8 @@ export function formatPreview(
         .replace(
             /______/g,
             reveal
-            ? `<span class='cloze-answer'>${answer}</span>`
-            : "<span class='cloze-answer' id='active-cloze'>______</span>"
-            
+                ? `<span class='cloze-answer'>${answer}</span>`
+                : "<span class='cloze-answer' id='active-cloze'>______</span>"
+
         );
 }

@@ -10,11 +10,9 @@ const Login = () => {
 
   const [loginOn, setLoginOn] = useState(true);
 
-  const currentSchema =
-    loginOn
-      ? loginSchema
-      : registerSchema;
+  const currentSchema = loginOn ? loginSchema : registerSchema;
 
+  // Ferramentas do react-hook-form
   const {
     register,
     handleSubmit,
@@ -22,16 +20,13 @@ const Login = () => {
     formState: { errors }
   } = useForm<LoginFormData | RegisterFormData>({
     resolver: zodResolver(currentSchema)
-  }); // ferramentas do react-hook-form
+  });
 
   const navigate = useNavigate();
 
   const [msg, setMsg] = useState('');
 
-
-
   function showMessage(message: string) {
-
     setMsg(message);
 
     setTimeout(() => {
@@ -42,7 +37,6 @@ const Login = () => {
   async function handleLogin(data: LoginFormData) {
 
     try {
-
       const response = await login(
         data.email,
         data.password
@@ -61,11 +55,7 @@ const Login = () => {
       navigate('/api/notas');
 
     } catch (err: any) {
-
-      showMessage(
-        err.response?.data?.message ||
-        "Erro ao fazer login."
-      );
+      showMessage(err.response?.data?.message || "Erro ao fazer login.");
     }
   }
 
