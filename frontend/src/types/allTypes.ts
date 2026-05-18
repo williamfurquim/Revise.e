@@ -2,7 +2,7 @@ export interface tyNotes {
     id: number,
     title: string,
     note: string
-    reviewCount: number
+    reviewCount?: number
 }
 
 export type tyCreateNote = Omit<tyNotes, "id">;
