@@ -8,7 +8,7 @@ import { authRouter } from "./routes/authRoutes.js";
 import { reviewRouter } from "./routes/reviewRoutes.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json({
     limit: "10kb"
@@ -16,18 +16,23 @@ app.use(express.json({
 
 const allowedOrigins = [
     "http://localhost:5173",
-    process.env.FRONTEND_URL
+    "https://revise-william-furquims-projects.vercel.app"
 ];
 
 app.use(cors({
     origin: (origin, callback) => {
-        console.log("Origin:", origin);
+        console.log("Request Origin:", origin);
 
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
+        // Permite requests sem origin (Postman, mobile apps etc)
+        if (!origin) {
+            return callback(null, true);
         }
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(null, false);
     },
     credentials: true
 }));
