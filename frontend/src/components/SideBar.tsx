@@ -8,7 +8,7 @@ const SideBar = () => {
         if (confirmed){
             localStorage.removeItem("token");
             localStorage.removeItem("user");
-            navigate('/auth/login');
+            navigate('/login');
         }
     }
 
@@ -19,21 +19,21 @@ const SideBar = () => {
             <nav>
                 <ul>
                     <li>
-                        <Link to={'/api/notas'}>
+                        <Link to={'/notas'}>
                             <i className="fa-solid fa-notes-medical"></i>
                             Anotações
                         </Link>
                     </li>
 
                     <li>
-                        <Link to={'/api/revisao'}>
+                        <Link to={'/revisao'}>
                             <i className="fa-solid fa-brain"></i>
                             Revisão
                         </Link>
                     </li>
 
                     <li>
-                        <Link to={'/api/configuracoes'}>
+                        <Link to={'/configuracoes'}>
                             <i className="fa-solid fa-gear"></i>
                             Configurações
                         </Link>

@@ -57,7 +57,7 @@ const Login = () => {
         JSON.stringify(response.data.user)
       );
 
-      navigate('/api/notas');
+      navigate('/notas');
 
     } catch (err: any) {
       showMessage(err.response?.data?.message || "Erro ao fazer login.");

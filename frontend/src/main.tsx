@@ -20,11 +20,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/auth/login" replace />} />
-        <Route path='/auth/login' element={<Login />} />
-        <Route path='/api/notas' element={<ProtectedRoute><App /></ProtectedRoute>} />
-        <Route path='/api/configuracoes' element={<ProtectedRoute><Configs /></ProtectedRoute>} />
-        <Route path='/api/revisao' element={<ProtectedRoute><Review /></ProtectedRoute>}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/notas' element={<ProtectedRoute><App /></ProtectedRoute>} />
+        <Route path='/configuracoes' element={<ProtectedRoute><Configs /></ProtectedRoute>} />
+        <Route path='/revisao' element={<ProtectedRoute><Review /></ProtectedRoute>}
         />
       </Routes>
     </BrowserRouter>
