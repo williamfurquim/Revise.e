@@ -14,3 +14,10 @@ export const login = asyncHandler(async (req, res) => {
 
     res.json(result);
 });
+
+export const finishTutorial = asyncHandler(async (req, res) => {
+
+    await authServices.updateTutorial(req.userId);
+
+    res.sendStatus(204);
+})

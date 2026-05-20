@@ -23,7 +23,8 @@ export const authServices = {
         return {
             id: user.id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            tutorial: user.tutorial
         };
     },
 
@@ -50,8 +51,13 @@ export const authServices = {
             user: {
                 id: user.id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                tutorial: user.tutorial
             }
         };
+    },
+
+    async updateTutorial(userId){
+        await authRepository.updateTutorial(userId);
     }
 };

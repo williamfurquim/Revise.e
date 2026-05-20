@@ -9,7 +9,8 @@ export const authRepository = {
                 id: true,
                 name: true,
                 email: true,
-                password: true
+                password: true,
+                tutorial: true
             }
         });
     },
@@ -17,6 +18,17 @@ export const authRepository = {
     create(data) {
         return prisma.user.create({
             data
+        });
+    },
+
+    updateTutorial(id) {
+        return prisma.user.update({
+            where: {
+                id
+            },
+            data: {
+                tutorial: true
+            }
         });
     }
 };
