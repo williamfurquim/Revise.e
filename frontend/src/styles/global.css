@@ -55,6 +55,7 @@
     --transition: 0.25s ease;
 
     --sidebar-width: 260px;
+    --images-tutorial-border: rgba(255, 255, 255, 0.03);
 
 }
 
@@ -96,6 +97,8 @@
 
     --shadow-lg:
         0 25px 60px rgba(15, 23, 42, 0.12);
+
+    --images-tutorial-border: rgb(7, 7, 7);
 }
 
 /* =========================================================
@@ -161,10 +164,22 @@ ul {
     min-height: 100vh;
 }
 
-main {
+main:not(.tutorial-page) {
     width: 100%;
 
     margin-left: var(--sidebar-width);
+
+    padding: 40px;
+
+    animation: fadeIn 0.35s ease;
+}
+
+.tp-margin {
+    margin-left: var(--sidebar-width);
+}
+
+main.tutorial-page {
+    width: 100%;
 
     padding: 40px;
 

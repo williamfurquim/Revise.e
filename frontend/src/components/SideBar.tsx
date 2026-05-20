@@ -19,6 +19,13 @@ const SideBar = () => {
             <nav>
                 <ul>
                     <li>
+                        <Link to={'/tutorial'}>
+                            <i className="fa-brands fa-readme"></i>
+                            Tutorial
+                        </Link>
+                    </li>
+
+                    <li>
                         <Link to={'/notas'}>
                             <i className="fa-solid fa-notes-medical"></i>
                             Anotações

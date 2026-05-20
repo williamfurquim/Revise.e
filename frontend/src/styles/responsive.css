@@ -4,9 +4,42 @@
         grid-template-columns:
             repeat(auto-fill, minmax(280px, 1fr));
     }
+
+    .tutorial-hero,
+    .tutorial-card {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .tutorial-hero-content,
+    .tutorial-card-content {
+        order: 1;
+    }
+
+    .tutorial-hero-image,
+    .tutorial-card-image {
+        order: 2;
+
+        width: 100%;
+    }
+
+    .tutorial-image {
+        height: 320px;
+        width: 100%;
+        display: block;
+    }
+
+    .tutorial-hero-content h1 {
+        font-size: 2.8rem;
+    }
 }
 
 @media (max-width: 900px) {
+
+    aside li,
+    aside a {
+        font-size: 0.95rem;
+    }
 
     aside {
         width: 100%;
@@ -71,9 +104,31 @@
     .modal-content {
         padding: 22px;
     }
+
+    main {
+        padding: 24px;
+    }
+
+    .tutorial-card {
+        padding: 22px;
+    }
+
+    .tutorial-hero-content h1 {
+        font-size: clamp(2rem, 8vw, 2.2rem);
+    }
 }
 
 @media (max-width: 600px) {
+
+    aside li,
+    aside a {
+        font-size: 0.8rem;
+        gap: 2px;
+    }
+
+    .tutorial-image {
+        height: 240px;
+    }
 
     main {
         padding: 18px;

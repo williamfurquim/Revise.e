@@ -57,7 +57,11 @@ const Login = () => {
         JSON.stringify(response.data.user)
       );
 
-      navigate('/notas');
+      if (!response.data.user.tutorial){
+        navigate('/tutorial');
+      } else {
+        navigate('/notas')
+      }
 
     } catch (err: any) {
       showMessage(err.response?.data?.message || "Erro ao fazer login.");

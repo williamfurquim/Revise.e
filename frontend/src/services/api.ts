@@ -62,3 +62,5 @@ export const register = (
 });
 
 export const patch = (id: number) => api.patch(`/review/${id}/review-count`);
+
+export const finishTutorial = () => api.patch('/auth/tutorial');
