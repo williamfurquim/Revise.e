@@ -1,4 +1,3 @@
-import SideBar from '../components/SideBar';
 import { useNavigate } from 'react-router-dom';
 import { finishTutorial } from '../services/api';
 import formularioImg from "../images/formulario.png";
