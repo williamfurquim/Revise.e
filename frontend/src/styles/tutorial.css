@@ -1,7 +1,11 @@
 .tutorial-page {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
+    padding: 40px;
+    margin-left: 0;
+    animation: fadeIn 0.35s ease;
     gap: 40px;
 }
 
@@ -145,6 +149,10 @@
     justify-content: center;
 
     gap: 18px;
+}
+
+.tutorial-card-content button {
+    animation: jump 1s infinite;
 }
 
 .tutorial-card-content h2 {

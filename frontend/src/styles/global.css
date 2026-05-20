@@ -164,22 +164,10 @@ ul {
     min-height: 100vh;
 }
 
-main:not(.tutorial-page) {
+main {
     width: 100%;
 
     margin-left: var(--sidebar-width);
-
-    padding: 40px;
-
-    animation: fadeIn 0.35s ease;
-}
-
-.tp-margin {
-    margin-left: var(--sidebar-width);
-}
-
-main.tutorial-page {
-    width: 100%;
 
     padding: 40px;
 
@@ -243,6 +231,20 @@ main h2 {
 
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0); 
+    }
+
+    50% {
+        transform: translateY(-3px);  
+    }
+
+    100% {
+        transform: translateY(0);        
     }
 }
 
