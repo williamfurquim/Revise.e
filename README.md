@@ -57,29 +57,29 @@ O coração do projeto exige transformar a sintaxe simples {{palavra}} em elemen
 
 📝 Módulo de Escrita Avançado
 
-Marcação Simplificada: Envolva qualquer palavra em {{ }} para criar um ponto de ocultação para estudo.
+* Marcação Simplificada: Envolva qualquer palavra em {{ }} para criar um ponto de ocultação para estudo.
 
-Filtro de Preview: Visualização limpa dos blocos de notas, escondendo os marcadores de código para leitura corrida.
+* Filtro de Preview: Visualização limpa dos blocos de notas, escondendo os marcadores de código para leitura corrida.
 
-Auto-Save: Salvamento transparente em background para prevenção contra perda de dados.
+* Auto-Save: Salvamento transparente em background para prevenção contra perda de dados.
 
 🧠 Painel de Aprendizado Ativo
 
-Modo Revisão: Renderização com lacunas ocultas que desafiam o cérebro a recuperar a informação (Active Recall).
+* Modo Revisão: Renderização com lacunas ocultas que desafiam o cérebro a recuperar a informação (Active Recall).
 
-Interface Semidirecionada: Controle total do estudante para revelar respostas uma a uma ou em bloco.
+* Interface Semidirecionada: Controle total do estudante para revelar respostas uma a uma ou em bloco.
 
-Tema Customizável: Suporte a Dark/Light Mode adaptativo para sessões longas de estudo noturno.
+* Tema Customizável: Suporte a Dark/Light Mode adaptativo para sessões longas de estudo noturno.
 
-🛠️ Stack Tecnológica
+## 🛠️ Stack Tecnológica
 
-Core: React, Node.JS, TypeScript.
+**Core**: React, Node.JS, TypeScript.
 
-Form & Validation: React Hook Form, Zod.
+**Form & Validation**: React Hook Form, Zod.
 
-Estilização & Layout: CSS3 Vanilla (Custom Properties, Flexbox, Grid), Design Responsivo Fluido (Breakpoints: 1100px / 900px / 600px).
+**Estilização & Layout**: CSS3 Vanilla (Custom Properties, Flexbox, Grid), Design Responsivo Fluido (Breakpoints: 1100px / 900px / 600px).
 
-Comunicação: Axios (Interceptors de requisição e gerenciamento de Tokens JWT).
+**Comunicação**: Axios (Interceptors de requisição e gerenciamento de Tokens JWT).
 
 👥 Desenvolvedor
 
