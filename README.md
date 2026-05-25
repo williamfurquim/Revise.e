@@ -41,7 +41,7 @@ A aplicação foi projetada seguindo os princípios de uma Single Page Applicati
 Como esta plataforma lida com entrada constante de dados e fluxos sequenciais de revisão, tomei decisões de engenharia focadas em performance de renderização, consistência de dados e experiência do usuário (UX):
 1. Otimização de I/O em Tempo Real via Debounce Pattern
 
-Salvar cada caractere digitado diretamente na API causaria um gargalo severo de infraestrutura (HTTP Overhead). Para mitigar isso, implementei o padrão de projeto Debounce. O sistema aguarda uma pausa na digitação do usuário (ex: 800ms) antes de disparar uma única requisição de persistência em segundo plano. Isso garante o comportamento de Auto-Save contínuo sem comprometer a performance do client ou do servidor.
+Salvar cada caractere digitado diretamente na API causaria um gargalo severo de infraestrutura (HTTP Overhead). Para mitigar isso, implementei o padrão de projeto Debounce. O sistema aguarda uma pausa na digitação do usuário (ex: 800ms) antes de disparar uma única requisição de persistência em segundo plano. Isso garante o comportamento de *autosave* contínuo sem comprometer a performance do cliente ou do servidor.
 
 2. Validação Estática e de Runtime Unificada (Zod + React Hook Form)
 
@@ -61,7 +61,7 @@ O coração do projeto exige transformar a sintaxe simples {{palavra}} em elemen
 
 * Filtro de Preview: Visualização limpa dos blocos de notas, escondendo os marcadores de código para leitura corrida.
 
-* Auto-Save: Salvamento transparente em background para prevenção contra perda de dados.
+* *Autosave*: Salvamento transparente em background para prevenção contra perda de dados.
 
 🧠 Painel de Aprendizado Ativo
 
