@@ -252,7 +252,7 @@ main h2 {
    BUTTONS
    ========================================================= */
 
-button {
+button:not(.tutorial-card-content button) {
     border: none;
 
     padding: 14px 18px;

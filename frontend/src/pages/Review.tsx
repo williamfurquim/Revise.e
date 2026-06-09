@@ -1,23 +1,11 @@
 import { useEffect, useState, useRef } from "react";
-
 import SideBar from "../components/SideBar";
-
 import { api, get } from "../services/api";
-
-import {
-    type ReviewCard,
-    type tyNotes
-} from "../types/allTypes";
-
+import { type ReviewCard, type tyNotes } from "../types/allTypes";
 import { formatPreview } from "../services/formatPreview";
-
 import { patch } from "../services/api";
 
 const Review = () => {
-
-    // =========================
-    // STATES
-    // =========================
 
     const [notes, setNotes] =
         useState<tyNotes[]>([]);
@@ -39,9 +27,7 @@ const Review = () => {
 
     const lineRef = useRef<HTMLDivElement | null>(null);
 
-    // =========================
     // BUSCAR NOTAS
-    // =========================
 
     async function fetchNotes() {
 
@@ -98,9 +84,7 @@ const Review = () => {
         }
     }, [currentIndex])
 
-    // =========================
     // INICIAR REVISÃO
-    // =========================
 
     async function startReview(
         noteId: number
@@ -144,9 +128,7 @@ const Review = () => {
         setShowAnswer(false);
     }
 
-    // =========================
     // LOADING
-    // =========================
 
     if (loading) {
 
@@ -166,16 +148,11 @@ const Review = () => {
         );
     }
 
-    // =========================
     // CARD ATUAL
-    // =========================
 
     const currentCard =
         cards[currentIndex];
 
-    // =========================
-    // JSX
-    // =========================
 
     return (
 

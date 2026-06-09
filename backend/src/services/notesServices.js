@@ -18,8 +18,6 @@ export const notesServices = {
         });
 
         const cards = extractClozeCards(data.note);
-        console.log(cards);
-
         if (cards.length > 0) {
             await reviewRepository.createMany(
                 cards.map(card => ({

@@ -152,7 +152,26 @@
 }
 
 .tutorial-card-content button {
-    animation: jump 1s infinite;
+    animation: jump .5s infinite;
+
+    border: none;
+
+    padding: 14px 18px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    color: rgb(0, 0, 0);
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+    box-shadow:
+        0 10px 25px rgba(124, 92, 255, 0.22);
 }
 
 .tutorial-card-content h2 {

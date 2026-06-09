@@ -5,7 +5,7 @@ const SideBar = () => {
 
     function logout() {
         const confirmed = confirm('Tem certeza que quer desconectar?');
-        if (confirmed){
+        if (confirmed) {
             localStorage.removeItem("token");
             localStorage.removeItem("user");
             navigate('/login');
@@ -18,13 +18,6 @@ const SideBar = () => {
 
             <nav>
                 <ul>
-                    <li>
-                        <Link to={'/tutorial'}>
-                            <i className="fa-brands fa-readme"></i>
-                            Tutorial
-                        </Link>
-                    </li>
-
                     <li>
                         <Link to={'/notas'}>
                             <i className="fa-solid fa-notes-medical"></i>
@@ -48,11 +41,18 @@ const SideBar = () => {
 
                     <li>
                         <a href="https://github.com/williamfurquim/Revise.e"
-                        target="_blank"
-                        rel="noopener noreferrer">
+                            target="_blank"
+                            rel="noopener noreferrer">
                             <i className="fa-brands fa-github"></i>
                             GitHub
                         </a>
+                    </li>
+
+                    <li>
+                        <Link to={'/tutorial'}>
+                            <i className="fa-brands fa-readme"></i>
+                            Tutorial
+                        </Link>
                     </li>
 
                     <li onClick={logout}>
