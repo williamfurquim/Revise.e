@@ -57,6 +57,9 @@
     --sidebar-width: 260px;
     --images-tutorial-border: rgba(255, 255, 255, 0.03);
 
+    --tutorial-mark: #9767f9;
+    --start-button-tutorial: #f6f6f6;
+
 }
 
 /* =========================================================
@@ -99,6 +102,9 @@
         0 25px 60px rgba(15, 23, 42, 0.12);
 
     --images-tutorial-border: rgb(7, 7, 7);
+
+    --tutorial-mark: #621dec;
+    --start-button-tutorial: #645aee;
 }
 
 /* =========================================================
@@ -236,15 +242,15 @@ main h2 {
 
 @keyframes jump {
     0% {
-        transform: translateY(0); 
+        transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-3px);  
+        transform: translateY(-3px);
     }
 
     100% {
-        transform: translateY(0);        
+        transform: translateY(0);
     }
 }
 

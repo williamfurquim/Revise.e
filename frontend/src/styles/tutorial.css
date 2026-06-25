@@ -40,9 +40,9 @@
         rgba(139, 92, 246, 0.14);
 
     border:
-        1px solid rgba(139, 92, 246, 0.24);
+        1px solid var(--tutorial-mark);
 
-    color: #b794ff;
+    color: var(--tutorial-mark);
 
     font-size: .95rem;
     font-weight: 600;
@@ -67,7 +67,7 @@
 }
 
 .mark {
-    color: #b794ff;
+    color: var(--tutorial-mark);
     font-weight: bolder;
 }
 
@@ -152,7 +152,7 @@
 }
 
 .tutorial-card-content button {
-    animation: jump .5s infinite;
+    animation: jump 1.5s infinite;
 
     border: none;
 
@@ -160,7 +160,7 @@
 
     border-radius: 14px;
 
-    background: white;
+    background: var(--start-button-tutorial);
 
     color: rgb(0, 0, 0);
 

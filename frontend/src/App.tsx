@@ -85,7 +85,10 @@ function App() {
         />
 
         <h2>
-          Total de notas: {totalList}
+          {totalList === 1 
+          ? `${totalList} nota encontrada`
+          : `${totalList} notas encontradas`
+          }
         </h2>
 
         <input

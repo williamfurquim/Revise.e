@@ -122,7 +122,7 @@ const TutorialPage = () => {
 
                             </ul>
 
-                            <button onClick={handleFinishTutorial}>
+                            <button className='start-now' onClick={handleFinishTutorial}>
                                 Começar agora
                             </button>
 
