@@ -35,3 +35,5 @@ createRoot(document.getElementById('root')!).render(
     </ThemeProvider>
   </StrictMode>,
 )
+// Trocar responsaibilidade do main.tsx, o ideal é ele somente inicializar a aplicação.
+// Jogar a lógica de rotas para outro arquivo.

@@ -19,14 +19,15 @@ function App() {
     resolver: zodResolver(noteSchema)
   });
 
+  // ===== VARIÁVEIS GLOBAIS ===== 
+
   const [notesList, setNotesList] = useState<tyNotes[]>([]);
   const [noteSelected, setNoteSelected] = useState<tyNotes | null>(null);
-
   const [search, setSearch] = useState("");
-
   let totalList = notesList.length;
-
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  // ===== FUNÇÃO GET NOTAS DA API =====
 
   async function getApi() {
     try {
@@ -41,6 +42,8 @@ function App() {
     getApi();
   }, []);
 
+  // ===== FUNÇÃO DELETE NOTA DA API =====
+
   async function handleDelete(id: number) {
     try {
       await remove(id);
@@ -49,6 +52,8 @@ function App() {
       console.error(err);
     }
   }
+
+  // ===== FUNÇÃO POST NOTA DA API =====
 
   async function onSubmit(data: NoteFormData) {
     try {
@@ -66,13 +71,10 @@ function App() {
   }
 
   return (
-
     <div className="layout">
-
       <SideBar />
 
       <main>
-
         <p>
           Olá, {user.name}!
         </p>
@@ -85,12 +87,13 @@ function App() {
         />
 
         <h2>
-          {totalList === 1 
-          ? `${totalList} nota encontrada`
-          : `${totalList} notas encontradas`
+          {totalList === 1
+            ? `${totalList} nota encontrada`
+            : `${totalList} notas encontradas`
           }
         </h2>
 
+        {/* Barra de pesquisa */}
         <input
           className='inputSearch'
           type="text"
@@ -101,13 +104,14 @@ function App() {
           }
         />
 
+        {/* Anotações do usuário */}
         <NoteCard
           notesList={notesList}
-          setNoteSelected={setNoteSelected}
+          setNotesList={setNotesList}
           noteSelected={noteSelected}
+          setNoteSelected={setNoteSelected}
           handleDelete={handleDelete}
           search={search}
-          setNotesList={setNotesList}
         />
 
       </main>

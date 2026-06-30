@@ -12,7 +12,7 @@ const NoteCard = ({
     setNotesList
 }: INoteCardProps) => {
 
-    //Eestados locais de edição
+    // ===== ESTADOS LOCAIS DE EDIÇÃO =====
     const [editTitle, setEditTitle] = useState("");
     const [editNote, setEditNote] = useState("");
 
@@ -27,6 +27,7 @@ const NoteCard = ({
     }, [noteSelected]);
 
     // Auto-save com debounce + proteção
+    // ==== ?
     useEffect(() => {
         if (!noteSelected) return;
 
@@ -78,7 +79,7 @@ const NoteCard = ({
 
     }, [editTitle, editNote, noteSelected, setNotesList]);
 
-    // Filtro inteligente
+    // ==== FILTRO INTELIGENTE PARA O SEARCH
     const normalize = useCallback((text: string) => {
         return text
             .toLowerCase()
@@ -88,7 +89,7 @@ const NoteCard = ({
             .trim();
     }, []);
 
-    // Filtro da search
+    // ==== SEARCH =====
     const filtered = useMemo(() => {
         const normalizedSearch = normalize(search);
 
@@ -108,8 +109,8 @@ const NoteCard = ({
                 {filtered.length > 0 ? (
                     filtered.map((not) => (
                         <div
-                            key={not.id}
                             className="note-card"
+                            key={not.id}
                             onClick={(e) => {
                                 const target = e.target as HTMLElement;
 
@@ -118,6 +119,7 @@ const NoteCard = ({
                                 setNoteSelected(not);
                             }}>
 
+                            {/* Resultados da pesquisa */}
                             <h2>{not.title}</h2>
                             <p dangerouslySetInnerHTML={{
                                 __html: formatPreview(not.note)
@@ -140,10 +142,10 @@ const NoteCard = ({
                 )}
 
             </section>
+            {/* Mostra o modal se uma nota for selecionada */}
             {noteSelected && (
                 <div className="modal">
                     <div className="modal-content">
-
                         <div className="modal-header">
 
                             <button onClick={() => setNoteSelected(null)}>
@@ -158,8 +160,7 @@ const NoteCard = ({
                                         handleDelete(noteSelected.id);
                                         setNoteSelected(null);
                                     }
-                                }}
-                            >
+                                }}>
                                 Excluir
                             </button>
                         </div>
@@ -177,7 +178,6 @@ const NoteCard = ({
                         />
 
                         {saving && <span>Salvando...</span>}
-
                     </div>
                 </div>
             )}

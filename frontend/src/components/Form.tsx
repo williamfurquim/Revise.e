@@ -1,3 +1,4 @@
+// ===== FORMULÁRIO DE ANOTAÇÕES =====
 import { type FieldErrors, type UseFormHandleSubmit, type UseFormRegister } from "react-hook-form";
 import { type NoteFormData } from "../schemas/notesSchema";
 
@@ -8,14 +9,9 @@ type IFormProps = {
   errors: FieldErrors<NoteFormData>;
 };
 
-const Form = ({
-  register,
-  handleSubmit,
-  onSubmit,
-  errors
-}: IFormProps) => {
-
+const Form = ({ register, handleSubmit, onSubmit, errors }: IFormProps) => {
   return (
+
     <form onSubmit={handleSubmit(onSubmit)}>
 
       <input

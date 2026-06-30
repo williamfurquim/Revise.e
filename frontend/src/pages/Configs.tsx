@@ -6,8 +6,8 @@ const Configs = () => {
     const { isDark, setIsDark } = UseTheme();
 
     return (
-
         <div className='layout'>
+
             <SideBar />
 
             <main className="configs-page">

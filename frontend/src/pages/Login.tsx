@@ -9,7 +9,10 @@ import logoRevisee from '../images/logo-revisee.png'
 const Login = () => {
 
   const [loginOn, setLoginOn] = useState(true);
+  const [msg, setMsg] = useState('');
+  const navigate = useNavigate();
 
+  // ===== ?
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,10 +30,6 @@ const Login = () => {
     }
   });
 
-  const navigate = useNavigate();
-
-  const [msg, setMsg] = useState('');
-
   function showMessage(message: string) {
     setMsg(message);
 
@@ -40,38 +39,27 @@ const Login = () => {
   }
 
   async function handleLogin(data: LoginFormData) {
-
     try {
       const response = await login(
         data.email,
         data.password
       );
 
-      localStorage.setItem(
-        "token",
-        response.data.token
-      );
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.data.user)
-      );
-
-      if (!response.data.user.tutorial){
+      if (!response.data.user.tutorial) {
         navigate('/tutorial');
       } else {
         navigate('/notas')
       }
-
     } catch (err: any) {
       showMessage(err.response?.data?.message || "Erro ao fazer login.");
     }
   }
 
   async function handleRegister(data: RegisterFormData) {
-
     try {
-
       await registerUser(
         data.name,
         data.email,
@@ -90,34 +78,24 @@ const Login = () => {
       setLoginOn(true);
 
     } catch (err: any) {
-
-      showMessage(
-        err.response?.data?.message ||
-        `Erro ao registrar: ${err}`
-      );
+      showMessage(err.response?.data?.message || `Erro ao registrar: ${err}`);
     }
   }
 
   return (
     <div className="auth-container">
 
-      <form
-        onSubmit={
-          loginOn
-            ? loginForm.handleSubmit(handleLogin)
-            : registerForm.handleSubmit(handleRegister)
-        }
-      >
+      {/* Container do form para login ou register */}
+      <form onSubmit={loginOn
+        ? loginForm.handleSubmit(handleLogin)
+        : registerForm.handleSubmit(handleRegister)
+      }>
 
-        <img
-          src={logoRevisee}
-          alt="logo Revise.e"
-        />
+        <img src={logoRevisee} alt="logo Revise.e" />
 
+        {/* Mostrar inputs de login ou do register, começando por login */}
         {loginOn ? (
-
           <>
-
             <h1>Acesse a sua conta</h1>
 
             <input
@@ -141,16 +119,11 @@ const Login = () => {
             )}
 
             <div className="options">
-
-              <input
-                type="checkbox"
-                id="checkbox"
-              />
+              <input type="checkbox" id="checkbox" />
 
               <label htmlFor="checkbox">
                 Manter-me conectado
               </label>
-
             </div>
 
             {msg && <p>{msg}</p>}
@@ -159,26 +132,18 @@ const Login = () => {
               Entrar
             </button>
 
-            <button
-              type="button"
-              onClick={() => {
+            <button type="button" onClick={() => {
+              loginForm.reset();
+              registerForm.reset();
 
-                loginForm.reset();
-
-                registerForm.reset();
-
-                setLoginOn(false);
-
-                setMsg('');
-              }}
-            >
+              setLoginOn(false);
+              setMsg('');
+            }}>
               Criar conta
             </button>
-
           </>
 
-        ) : (
-
+        ) : ( 
           <>
             <p>Vamos criar a sua conta!</p>
 
@@ -218,28 +183,19 @@ const Login = () => {
               Registrar-se
             </button>
 
-            <button
-              type="button"
-              onClick={() => {
+            <button type="button" onClick={() => {
+              loginForm.reset();
+              registerForm.reset();
 
-                loginForm.reset();
-
-                registerForm.reset();
-
-                setLoginOn(true);
-
-                setMsg('');
-              }}
-            >
+              setLoginOn(true);
+              setMsg('');
+            }}>
               Já possuo conta
             </button>
-
           </>
-
         )}
 
       </form>
-
     </div>
   );
 }

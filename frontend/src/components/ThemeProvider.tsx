@@ -13,6 +13,7 @@ interface ThemeProviderProps {
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
+  
   const [isDark, setIsDark] = useState<boolean>(() => {
     return localStorage.getItem('theme') === 'dark';
   });
@@ -31,12 +32,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }, [isDark]);
 
   return (
-    <ThemeContext.Provider value={{
-      isDark,
-      setIsDark
-    }}>
+    <ThemeContext.Provider value={{ isDark, setIsDark }}>
       {children}
     </ThemeContext.Provider>
-
   );
 }
