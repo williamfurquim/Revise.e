@@ -1,25 +1,25 @@
 export function formatPreview(
     text: string,
     answer?: string,
-    reveal: boolean = false
+    reveal: boolean = false,
+    revealedAnswers: string[] = [],
+    reviewMode = false
 ) {
-
     return text
+        .replace(/{{(.*?)}}/g, (_, word) => {
 
-        // cloze normal
-        .replace(
-            /{{(.*?)}}/g,
-            "<span class='cloze'>$1</span>"
-        )
+            if (!reviewMode) {
+                return `<span class="cloze">${word}</span>`;
+            }
 
-        // ocultos
-        .replace(
-            /{{?}}/g,
-            "<span class='cloze-hidden'>████</span>"
-        )
+            if (revealedAnswers.includes(word)) {
+                return `<span class="cloze-answer">${word}</span>`;
+            }
 
-        // lacuna ativa
-        .replace(
+            return `<span class="cloze-hidden">██████</span>`;
+        })
+        
+        .replace( // lacuna ativa
             /______/g,
             reveal
                 ? `<span class='cloze-answer'>${answer}</span>`

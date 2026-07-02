@@ -9,23 +9,19 @@ const Review = () => {
 
     // ===== VARIÁVEIS GLOBAIS =====
 
-    const [notes, setNotes] =
-        useState<tyNotes[]>([]);
+    const [notes, setNotes] = useState<tyNotes[]>([]);
 
-    const [selectedNote, setSelectedNote] =
-        useState<number | null>(null);
+    const [selectedNote, setSelectedNote] = useState<number | null>(null);
 
-    const [cards, setCards] =
-        useState<ReviewCard[]>([]);
+    const [cards, setCards] = useState<ReviewCard[]>([]);
 
-    const [currentIndex, setCurrentIndex] =
-        useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    const [loading, setLoading] =
-        useState(true);
+    const [loading, setLoading] = useState(true);
 
-    const [showAnswer, setShowAnswer] =
-        useState(false);
+    const [showAnswer, setShowAnswer] = useState(false);
+
+    const [revealedAnswers, setRevealedAnswers] = useState<string[]>([]);
 
     const lineRef = useRef<HTMLDivElement | null>(null);
 
@@ -85,17 +81,24 @@ const Review = () => {
             setLoading(true);
             // Busca todos os cards
             const response = await api.get(`/review/${noteId}`);
+            console.log("API:", response.data);
             setCards(response.data);
+            console.log("Depois do setCards:", response.data);
 
             setSelectedNote(noteId);
             setShowAnswer(false);
             setCurrentIndex(0);
+            setRevealedAnswers([]);
         } catch (err) {
             console.error(err);
         } finally {
             setLoading(false);
         }
     }
+
+    useEffect(() => {
+        console.log("STATE:", cards);
+    }, [cards]);
 
     // ==== CANCELAR REVISÃO =====
 
@@ -104,6 +107,7 @@ const Review = () => {
         setCards([]);
         setCurrentIndex(0);
         setShowAnswer(false);
+        setRevealedAnswers([]);
     }
 
     // ==== TELA DE LOADING ====
@@ -123,6 +127,11 @@ const Review = () => {
     // ==== CARD ATUAL E SELECIONADO ====
 
     const currentCard = cards[currentIndex];
+    console.log({
+        currentIndex,
+        revealedAnswers,
+        currentQuestion: currentCard?.question
+    });
 
     return (
         <div className="layout">
@@ -212,7 +221,9 @@ const Review = () => {
                                         __html: formatPreview(
                                             currentCard.question,
                                             currentCard.answer,
-                                            showAnswer
+                                            showAnswer,
+                                            revealedAnswers,
+                                            true
                                         )
                                     }}
                                 />
@@ -220,7 +231,7 @@ const Review = () => {
 
                             {/* Aqui tem a lógica da barra inferior do card */}
                             {/* Começando com a palavra ainda não revelada */}
-                            
+
                             {!showAnswer ? (
                                 <div className="answer-area">
 
@@ -235,9 +246,14 @@ const Review = () => {
                                     <div className="review-actions">
 
                                         <button
-                                            onClick={() =>
+                                            onClick={() => {
                                                 setShowAnswer(true)
-                                            }>
+
+                                                setRevealedAnswers(prev => [
+                                                    ...prev,
+                                                    currentCard.answer
+                                                ]);
+                                            }}>
                                             Mostrar resposta
                                         </button>
 
