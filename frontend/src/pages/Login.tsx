@@ -51,7 +51,7 @@ const Login = () => {
       if (!response.data.user.tutorial) {
         navigate('/tutorial');
       } else {
-        navigate('/notas')
+        navigate('/notas');
       }
     } catch (err: any) {
       showMessage(err.response?.data?.message || "Erro ao fazer login.");

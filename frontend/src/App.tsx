@@ -120,3 +120,5 @@ function App() {
 }
 
 export default App;
+
+// ORGANIZAR FUNÇÕES AUXILIARES -> SCHEMAS, FORMATPREVIEW E TYPESCRIPT
